@@ -6,7 +6,7 @@ Public Interface IService1
     Function MyOperation1(ByVal sqlQuery As String) As String
     <OperationContract()> _
     Function getOneRow(ByVal sqlQuery As String) As String
-    'fjasfjsd
+    'fjasfj
     ' TODO: Add your service operations here
 
 End Interface
