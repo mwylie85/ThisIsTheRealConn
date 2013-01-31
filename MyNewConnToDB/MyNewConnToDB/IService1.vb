@@ -22,4 +22,4 @@ End Interface
 '    <DataMember()>
 '    Public Property StringValue() As String
 
-End Class
+
