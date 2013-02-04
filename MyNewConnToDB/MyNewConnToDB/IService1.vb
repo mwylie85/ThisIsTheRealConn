@@ -6,6 +6,9 @@ Public Interface IService1
     Function MyOperation1(ByVal sqlQuery As String) As String
     <OperationContract()> _
     Function getOneRow(ByVal sqlQuery As String) As String
+    <OperationContract()> _
+    Function getPic(ByVal getPicData As String) As Byte()
+
     'fjasf
     ' TODO: Add your service operations here
 

@@ -11,9 +11,6 @@ Imports System.Data.SqlTypes
 Imports System.Threading.Tasks
 Public Class Service1
     Implements IService1
-
-
-
     Dim x As String = Nothing
     Dim ConStr As String = "Server=instance37057.db.xeround.com;Port=5273;Database=cityofculturedb;Uid=mwylie85;Pwd=Computer1"
     Dim dSet As DataSet = Nothing
@@ -30,7 +27,7 @@ Public Class Service1
     Public Function MyOperation1(ByVal sqlQuery As String) As String Implements IService1.MyOperation1
         Dim x As String = Nothing
         Try
-            'sqlQuery = "SELECT * FROM derrycityevents"
+            sqlQuery = "SELECT * FROM derrycityevents"
             Dim con As New MySqlConnection(ConStr)
             Dim da As MySqlDataAdapter
             con.Open()
@@ -67,7 +64,7 @@ Public Class Service1
     Public Function getOneRow(ByVal sqlQuery As String) As String Implements IService1.getOneRow
         Dim x As String = Nothing
         Try
-            'sqlQuery = "SELECT * FROM derrycityevents"
+            sqlQuery = "SELECT * FROM derrycityevents Where Id=1"
             Dim con As New MySqlConnection(ConStr)
             Dim da As MySqlDataAdapter
             con.Open()
@@ -84,6 +81,28 @@ Public Class Service1
             Console.WriteLine(ex.StackTrace)
         End Try
         Return x
+    End Function
+
+    Public Function getPic(ByVal getPicData As String) As Byte() Implements IService1.getPic
+        Dim hasPicData() As Byte = Nothing
+        Try
+            getPicData = "SELECT * FROM derrycityevents Where Id =1"
+            Dim con As New MySqlConnection(ConStr)
+            Dim da As MySqlDataAdapter
+            con.Open()
+            'cmd.ExecuteNonQuery()
+            da = New MySqlDataAdapter(getPicData, con)
+            dSet = New DataSet
+            da.Fill(dSet)
+            da.Dispose()
+            con.Close()
+            With dSet.Tables(0).Rows(0)
+                hasPicData = .Item(3)
+            End With
+        Catch ex As Exception
+            Console.WriteLine(ex.StackTrace)
+        End Try
+        Return hasPicData
     End Function
 
 End Class
