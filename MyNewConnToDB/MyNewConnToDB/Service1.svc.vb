@@ -9,6 +9,8 @@ Imports System.Data
 Imports MySql.Data.MySqlClient
 Imports System.Data.SqlTypes
 Imports System.Threading.Tasks
+Imports System.IO
+
 Public Class Service1
     Implements IService1
     Dim x As String = Nothing
@@ -86,7 +88,7 @@ Public Class Service1
     Public Function getPic(ByVal getPicData As String) As Byte() Implements IService1.getPic
         Dim hasPicData() As Byte = Nothing
         Try
-            getPicData = "SELECT * FROM derrycityevents Where Id =1"
+            'getPicData = "SELECT * FROM derrycityevents Where Id =1"
             Dim con As New MySqlConnection(ConStr)
             Dim da As MySqlDataAdapter
             con.Open()
@@ -104,5 +106,15 @@ Public Class Service1
         End Try
         Return hasPicData
     End Function
+
+    'Public Function convertToByte(ByRef img As Object) As Byte()
+    '    Dim fs As FileStream = New FileStream(img, FileMode.Open, FileAccess.Read)
+    '    Dim br As BinaryReader = New BinaryReader(fs)
+    '    Dim bm() As Byte = br.ReadBytes(fs.Length)
+    '    br.Close()
+    '    fs.Close()
+    '    Return bm
+    'End Function
+
 
 End Class
