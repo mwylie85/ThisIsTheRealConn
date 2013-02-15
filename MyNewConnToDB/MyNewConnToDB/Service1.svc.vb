@@ -17,14 +17,15 @@ Public Class Service1
     Dim ConStr As String = "Server=instance37057.db.xeround.com;Port=5273;Database=cityofculturedb;Uid=mwylie85;Pwd=Computer1"
     Dim dSet As DataSet = Nothing
     ' Dim sqlStatment As String = "SELECT * FROM derrycityevents Where Id=1"
-    Structure getDetailsFromDB
+    Public Structure getDetailsFromDB
         Dim eventID As Integer
         Dim eventName As String
         Dim eventInfo As String
-        Dim eventPic As Object
+        Dim eventPic As Byte
     End Structure
-    Dim eventInfo As New List(Of getDetailsFromDB)
+    Public eventInfo As New List(Of getDetailsFromDB)
     Dim eventItem As New getDetailsFromDB
+
     Dim myArray As Array()
     Public Function MyOperation1(ByVal sqlQuery As String) As String Implements IService1.MyOperation1
         Dim x As String = Nothing
@@ -63,8 +64,10 @@ Public Class Service1
         Return x
     End Function
 
-    Public Function getOneRow(ByVal sqlQuery As String) As String Implements IService1.getOneRow
-        Dim x As String = Nothing
+    Public Function getOneRow(ByVal sqlQuery As String) As List(Of IService1.xxx) Implements IService1.getOneRow
+        Dim x As Object = Nothing
+        Dim my_List As New List(Of IService1.xxx)
+        Dim it As New IService1.xxx
         Try
             sqlQuery = "SELECT * FROM derrycityevents Where Id=1"
             Dim con As New MySqlConnection(ConStr)
@@ -77,12 +80,18 @@ Public Class Service1
             da.Dispose()
             con.Close()
             With dSet.Tables(0).Rows(0)
-                x = .Item(0) & "," & .Item(1) & "," & .Item(2) & "," & .Item(3).ToString
+                it.event_Id = .Item(0)
+                it.event_Address = .Item(1)
+                it.event_Info = .Item(2)
+                it.event_Img = .Item(3)
+                my_List.Add(it)
+                'my_List.Add(New getEventInfo(.Item(0)))
+                ' x = .Item(0) & "," & .Item(1) & "," & .Item(2) & "," & .Item(3).ToString
             End With
         Catch ex As Exception
             Console.WriteLine(ex.StackTrace)
         End Try
-        Return x
+        Return my_List
     End Function
 
     Public Function getPic(ByVal getPicData As String) As Byte() Implements IService1.getPic
