@@ -69,7 +69,7 @@ Public Class Service1
         Dim my_List As New List(Of IService1.xxx)
         Dim it As New IService1.xxx
         Try
-            sqlQuery = "SELECT * FROM derrycityevents Where Id=1"
+            sqlQuery = "SELECT * FROM derrycityevents"
             Dim con As New MySqlConnection(ConStr)
             Dim da As MySqlDataAdapter
             con.Open()
@@ -79,15 +79,17 @@ Public Class Service1
             da.Fill(dSet)
             da.Dispose()
             con.Close()
-            With dSet.Tables(0).Rows(0)
-                it.event_Id = .Item(0)
-                it.event_Address = .Item(1)
-                it.event_Info = .Item(2)
-                it.event_Img = .Item(3)
-                my_List.Add(it)
-                'my_List.Add(New getEventInfo(.Item(0)))
-                ' x = .Item(0) & "," & .Item(1) & "," & .Item(2) & "," & .Item(3).ToString
-            End With
+            For i = 0 To dSet.Tables(0).Rows.Count - 1
+                With dSet.Tables(0).Rows(i)
+                    it.event_Id = .Item(0)
+                    it.event_Address = .Item(1)
+                    it.event_Info = .Item(2)
+                    it.event_Img = .Item(3)
+                    my_List.Add(it)
+                    'my_List.Add(New getEventInfo(.Item(0)))
+                    ' x = .Item(0) & "," & .Item(1) & "," & .Item(2) & "," & .Item(3).ToString
+                End With
+            Next
         Catch ex As Exception
             Console.WriteLine(ex.StackTrace)
         End Try
