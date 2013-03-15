@@ -8,6 +8,7 @@ Public Interface IService1
         Dim event_Name As String
         Dim event_Info As String
         Dim event_Img() As Byte
+        ' this is a com
     End Structure
     <OperationContract()> _
     Function MyOperation1(ByVal sqlQuery As String) As String
