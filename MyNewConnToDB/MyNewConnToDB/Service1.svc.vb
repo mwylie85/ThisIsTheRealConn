@@ -85,6 +85,12 @@ Public Class Service1
                     it.event_Name = .Item(1)
                     it.event_Info = .Item(2)
                     it.event_Img = .Item(3)
+                    it.event_Venue = .Item(4)
+                    it.event_Address = .Item(5)
+                    it.event_Lat = .Item(6)
+                    it.event_Long = .Item(7)
+                    it.event_StartDate = .Item(8).ToString
+                    it.event_EndDate = .Item(9).ToString
                     my_List.Add(it)
                     'Just a com
                     'my_List.Add(New getEventInfo(.Item(0)))

@@ -8,6 +8,12 @@ Public Interface IService1
         Dim event_Name As String
         Dim event_Info As String
         Dim event_Img() As Byte
+        Dim event_Venue As String
+        Dim event_Address As String
+        Dim event_Lat As String
+        Dim event_Long As String
+        Dim event_StartDate As String
+        Dim event_EndDate As String
         ' this is a com
     End Structure
     <OperationContract()> _
