@@ -5,7 +5,7 @@ Imports System.Runtime.Serialization
 Public Interface IService1
     Structure xxx
         Dim event_Id As Integer
-        Dim event_Address As String
+        Dim event_Name As String
         Dim event_Info As String
         Dim event_Img() As Byte
     End Structure

@@ -86,6 +86,7 @@ Public Class Service1
                     it.event_Info = .Item(2)
                     it.event_Img = .Item(3)
                     my_List.Add(it)
+                    'Just a com
                     'my_List.Add(New getEventInfo(.Item(0)))
                     ' x = .Item(0) & "," & .Item(1) & "," & .Item(2) & "," & .Item(3).ToString
                 End With
