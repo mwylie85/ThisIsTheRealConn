@@ -16,17 +16,7 @@ Public Class Service1
     Dim x As String = Nothing
     Dim ConStr As String = "Server=instance37057.db.xeround.com;Port=5273;Database=cityofculturedb;Uid=mwylie85;Pwd=Computer1"
     Dim dSet As DataSet = Nothing
-    ' Dim sqlStatment As String = "SELECT * FROM derrycityevents Where Id=1"
-    Public Structure getDetailsFromDB
-        Dim eventID As Integer
-        Dim eventName As String
-        Dim eventInfo As String
-        Dim eventPic As Byte
-    End Structure
-    Public eventInfo As New List(Of getDetailsFromDB)
-    Dim eventItem As New getDetailsFromDB
 
-    Dim myArray As Array()
     Public Function MyOperation1(ByVal sqlQuery As String) As String Implements IService1.MyOperation1
         Dim x As String = Nothing
         Try
@@ -64,14 +54,13 @@ Public Class Service1
         Return x
     End Function
 
-    Public Function getOneRow(ByVal sqlQuery As String) As List(Of IService1.xxx) Implements IService1.getOneRow
+    Public Function getOneRow(ByVal sqlQuery As String) As List(Of IService1.eventDetails) Implements IService1.getOneRow
         Dim x As Object = Nothing
-        Dim my_List As New List(Of IService1.xxx)
-        Dim it As New IService1.xxx
+        Dim my_List As New List(Of IService1.eventDetails)
+        Dim it As New IService1.eventDetails
+        Dim con As New MySqlConnection(ConStr)
+        Dim da As MySqlDataAdapter = Nothing
         Try
-            'sqlQuery = "SELECT * FROM derrycityevents"
-            Dim con As New MySqlConnection(ConStr)
-            Dim da As MySqlDataAdapter
             con.Open()
             'cmd.ExecuteNonQuery()
             da = New MySqlDataAdapter(sqlQuery, con)
@@ -92,13 +81,14 @@ Public Class Service1
                     it.event_StartDate = .Item(8).ToString
                     it.event_EndDate = .Item(9).ToString
                     my_List.Add(it)
-                    'Just a com
-                    'my_List.Add(New getEventInfo(.Item(0)))
-                    ' x = .Item(0) & "," & .Item(1) & "," & .Item(2) & "," & .Item(3).ToString
                 End With
             Next
+            dSet.Dispose()
         Catch ex As Exception
             Console.WriteLine(ex.StackTrace)
+        Finally
+            da.Dispose()
+            con.Close()
         End Try
         Return my_List
     End Function
@@ -124,15 +114,4 @@ Public Class Service1
         End Try
         Return hasPicData
     End Function
-
-    'Public Function convertToByte(ByRef img As Object) As Byte()
-    '    Dim fs As FileStream = New FileStream(img, FileMode.Open, FileAccess.Read)
-    '    Dim br As BinaryReader = New BinaryReader(fs)
-    '    Dim bm() As Byte = br.ReadBytes(fs.Length)
-    '    br.Close()
-    '    fs.Close()
-    '    Return bm
-    'End Function
-
-
 End Class

@@ -3,7 +3,7 @@ Imports System.ServiceModel
 Imports System.Runtime.Serialization
 <ServiceContract()>
 Public Interface IService1
-    Structure xxx
+    Structure eventDetails
         Dim event_Id As Integer
         Dim event_Name As String
         Dim event_Info As String
@@ -14,18 +14,9 @@ Public Interface IService1
         Dim event_Long As String
         Dim event_StartDate As String
         Dim event_EndDate As String
-        ' this is a com
     End Structure
     <OperationContract()> _
-    Function MyOperation1(ByVal sqlQuery As String) As String
-    <OperationContract()> _
-    Function getOneRow(ByVal sqlQuery As String) As List(Of xxx)
-    <OperationContract()> _
-    Function getPic(ByVal getPicData As String) As Byte()
-
-    'fjasf
-    ' TODO: Add your service operations here
-
+    Function getOneRow(ByVal sqlQuery As String) As List(Of eventDetails)
 End Interface
 
 ' Use a data contract as illustrated in the sample below to add composite types to service operations.
