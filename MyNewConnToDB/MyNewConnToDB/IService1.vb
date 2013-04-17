@@ -15,9 +15,16 @@ Public Interface IService1
         Dim event_StartDate As String
         Dim event_EndDate As String
     End Structure
-    'set up operation contract for get rows
+    <OperationContract()> _
+    Function MyOperation1(ByVal sqlQuery As String) As String
     <OperationContract()> _
     Function getOneRow(ByVal sqlQuery As String) As List(Of eventDetails)
+    <OperationContract()> _
+    Function getPic(ByVal getPicData As String) As Byte()
+
+    'fjasf
+    ' TODO: Add your service operations here
+
 End Interface
 
 ' Use a data contract as illustrated in the sample below to add composite types to service operations.
